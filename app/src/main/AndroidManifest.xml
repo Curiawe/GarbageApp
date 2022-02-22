@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GarbageApp">
         <activity
-            android:name=".Add_Item"
+            android:name=".Add_ItemActivity"
             android:exported="false"
             android:label="@string/title_activity_add_item"
             android:theme="@style/Theme.GarbageApp.NoActionBar" />

@@ -50,7 +50,7 @@ public class ItemsDB {
         }
     }
 
-    public static void deleteItem(String input) {
+    public void deleteItem(String input) {
             sItemsDb.sorter.remove(input);
     }
 
