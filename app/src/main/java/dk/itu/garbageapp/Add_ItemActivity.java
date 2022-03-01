@@ -10,14 +10,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class Add_Item extends AppCompatActivity {
+public class Add_ItemActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
 
-        ItemsDB.initialize(Add_Item.this);
+        ItemsDB.initialize(Add_ItemActivity.this);
         ItemsDB sorter = ItemsDB.get();
 
         TextView description = findViewById(R.id.task_description); // we're not really doing anything with it, do we even need to instantiate it?
@@ -52,7 +52,7 @@ public class Add_Item extends AppCompatActivity {
         });
 
         returnBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(Add_Item.this, MainActivity.class);
+            Intent intent = new Intent(Add_ItemActivity.this, MainActivity.class);
             startActivity(intent);
         });
 

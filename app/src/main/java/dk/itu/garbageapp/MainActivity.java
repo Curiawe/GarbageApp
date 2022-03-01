@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         navBtnAdd.setOnClickListener(view -> {
             // create intent and start new activity!
-            Intent intent = new Intent(MainActivity.this, Add_Item.class);
+            Intent intent = new Intent(MainActivity.this, Add_ItemActivity.class);
             startActivity(intent);
         });
     }
