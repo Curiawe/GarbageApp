@@ -5,13 +5,13 @@ import android.content.Context;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class ItemsDB {
     private static ItemsDB sItemsDb;
 
     private final TreeMap<String, Item> sorter;
-    private final GarbageCategories categories;
 
     /**
      * Initialize the ItemsDB singleton.
@@ -30,8 +30,8 @@ public class ItemsDB {
 
     private ItemsDB(Context context) {
         sorter = new TreeMap<>();
-        categories = new GarbageCategories();
-        populateSorter(context,"items.txt");
+        new GarbageCategories();
+        populateSorter(context);
     }
 
     /**
@@ -50,22 +50,17 @@ public class ItemsDB {
         }
     }
 
-    public void deleteItem(String input) {
-            sItemsDb.sorter.remove(input);
-    }
-
-    public void add (String itemName, String itemType) {
-        Item toAdd = new Item(itemName, itemType);
-        sItemsDb.sorter.put(itemName, toAdd);
-    }
-
-    private boolean checkContains (String input) {
-        return (sItemsDb.sorter.containsKey(input));
+    public String listAll() {
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry <String, Item> item: sorter.entrySet()) {
+            result.append("\n").append(item.toString());
+        }
+        return result.toString();
     }
 
     // setup methods
 
-    private void populateSorter(Context context, String filename){
+    private void populateSorter(Context context){
         // Loosely based on
         // https://international.kk.dk/live/housing/settling-into-your-new-home/recycling-in-copenhagen
         // Not Comprehensive!
@@ -73,7 +68,7 @@ public class ItemsDB {
         // try-catch block largely adapted from https://github.itu.dk/jst/MMAD2022
         try {
             BufferedReader reader= new BufferedReader(
-                    new InputStreamReader(context.getAssets().open(filename)));
+                    new InputStreamReader(context.getAssets().open("items.txt")));
             String line= reader.readLine();
             while (line != null) {
                 String[] gItem= line.split(",");

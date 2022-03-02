@@ -1,40 +1,49 @@
 package dk.itu.garbageapp;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class SearchFragment extends Fragment {
 
-public class MainActivity extends AppCompatActivity {
+    private ItemsDB sorter;
+    private EditText prompt;
 
-    // Garbage V1_a
 
-    // Instantiate Map
+    public SearchFragment() {
+        // Required empty public constructor
+    }
 
-    @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
         // instantiate Sorter
         // have to do that first because we want to call a function from the sorter in the GUI
+        ItemsDB.initialize(getActivity());
+        sorter = ItemsDB.get();
+    }
 
-        ItemsDB.initialize(MainActivity.this);
-        ItemsDB sorter = ItemsDB.get();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        final View v = inflater.inflate(R.layout.search_fragment, container, false);
 
         //TextView description = findViewById(R.id.task_description);
         // do we really need this if we don't interact with it?
 
         // EditText by id
-        EditText prompt = findViewById(R.id.main_input);
+        prompt = v.findViewById(R.id.main_input);
         prompt.setHint("What do you want to recycle?");
 
-        Button where = findViewById(R.id.where_button);
-        Button navBtnAdd = findViewById(R.id.nav_add_button);
+        Button where = v.findViewById(R.id.where_button);
         //@Override
         where.setOnClickListener(view -> {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
@@ -44,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
             prompt.setText(result);
         });
 
-        navBtnAdd.setOnClickListener(view -> {
-            // create intent and start new activity!
-            Intent intent = new Intent(MainActivity.this, Add_ItemActivity.class);
-            startActivity(intent);
-        });
+        return v;
     }
 }
