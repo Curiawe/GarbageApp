@@ -6,9 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Observable;
 import java.util.TreeMap;
 
-public class ItemsDB {
+public class ItemsDB extends Observable {
     private static ItemsDB sItemsDb;
 
     private final TreeMap<String, Item> sorter;
@@ -48,6 +49,11 @@ public class ItemsDB {
 
             return sItemsDb.sorter.get(input).toString();
         }
+    }
+
+    public void addItem (String item, String category) {
+        sorter.put(item, new Item(item, category));
+        this.setChanged(); notifyObservers(); // mark as changed and notify observers of change
     }
 
     public String listAll() {

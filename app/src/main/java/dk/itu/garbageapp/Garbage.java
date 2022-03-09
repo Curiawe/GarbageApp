@@ -16,7 +16,6 @@ public class Garbage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.garbage);
-        ItemsDB.initialize(Garbage.this);
         fm = getSupportFragmentManager();
         setUpFragments();
     }

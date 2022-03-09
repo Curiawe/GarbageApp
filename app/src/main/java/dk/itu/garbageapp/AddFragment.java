@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.text.method.ScrollingMovementMethod;
 
 import androidx.fragment.app.Fragment;
 
-public class AddFragment extends Fragment {
+import java.util.Observable;
+import java.util.Observer;
+
+public class AddFragment extends Fragment implements Observer {
 
     private ItemsDB sorter;
 
@@ -24,6 +27,7 @@ public class AddFragment extends Fragment {
 
         ItemsDB.initialize(getActivity());
         sorter = ItemsDB.get();
+        sorter.addObserver(this);
 
     }
 
@@ -34,11 +38,16 @@ public class AddFragment extends Fragment {
         View v = inflater.inflate(R.layout.add_fragment, container, false);
 
         // get UI elements
-        TextView allItems = v.findViewById(R.id.all_imtems_label);
-        allItems.setText(sorter.listAll());
+        EditText allItems = v.findViewById(R.id.all_items);
+        String s = sorter.listAll();
+        allItems.setText(s);
         allItems.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         return v;
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+
+    }
 }
