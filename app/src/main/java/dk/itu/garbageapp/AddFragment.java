@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.text.method.ScrollingMovementMethod;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,7 +15,7 @@ import java.util.Observer;
 public class AddFragment extends Fragment implements Observer {
 
     private ItemsDB sorter;
-    private EditText allItems;
+    private TextView allItems;
 
     public AddFragment() {
         // Required empty public constructor
