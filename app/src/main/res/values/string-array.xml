@@ -1,15 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="category_array">
-        <item>Plastic (Plast)</item>
-        <item>Bio waste (Madaffald)</item>
-        <item>Bulky waste (Storskrald)</item>
-        <item>Cardboard (Pap)</item>
-        <item>Electronic waste (Elektronisk)</item>
-        <item>Garden waste (Haveaffald)</item>
-        <item>Glass (Glas)</item>
-        <item>Hazardous waste (Farlight affald)</item>
-        <item>Metal</item>
-        <item>Residual waste (Restaffald)</item>
-    </string-array>
-</resources>
+<resources></resources>
