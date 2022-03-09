@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">GarbageApp</string>
-    <string name="prompt">Where to place item:</string>
     <string name="where_to_place_item">Where to place item:</string>
     <string name="where">Where</string>
-    <string name="title_activity_add_item">Add_Item</string>
     <string name="add_item_prompt">Enter your item and garbage type.</string>
     <string name="add_item_button">Add Item</string>
     <string name="enter_item">Enter item</string>
@@ -11,4 +9,11 @@
     <string name="new_item">New Item:</string>
     <string name="item_type">Item type:</string>
     <string name="look_up_items">Look up items</string>
+    <string name="display_all_items">Display all items</string>
+    <string name="display_all">All Items:</string>
+
+    <string name="title_activity_garbage">Garbage</string>
+    <string name="loading_entries">loading entries...</string>
+    <string name="clear_search">Clear Search</string>
+
 </resources>

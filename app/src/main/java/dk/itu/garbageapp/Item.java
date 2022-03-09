@@ -44,7 +44,7 @@ public class Item implements Comparable<Item> {
     @NonNull
     @Override
     public String toString() {
-        return (item + " should be placed in: " + category);
+        return (item + " in: " + category);
     }
 
     // doing this in case I want to use a more efficient data structure than HashMap, or need this for future functionality
