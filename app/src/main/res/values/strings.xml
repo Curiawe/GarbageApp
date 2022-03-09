@@ -14,5 +14,6 @@
 
     <string name="title_activity_garbage">Garbage</string>
     <string name="loading_entries">loading entries...</string>
+    <string name="clear_search">Clear Search</string>
 
 </resources>

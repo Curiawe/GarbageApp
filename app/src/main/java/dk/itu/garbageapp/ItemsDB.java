@@ -59,7 +59,7 @@ public class ItemsDB extends Observable {
     public String listAll() {
         StringBuilder result = new StringBuilder();
         for (Map.Entry <String, Item> item: sorter.entrySet()) {
-            result.append("\n").append(item.toString());
+            result.append("\n").append(item.getValue().toString());
         }
         return result.toString();
     }

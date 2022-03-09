@@ -14,9 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.GarbageApp.NoActionBar">
+    <style name="Theme.GarbageApp.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.GarbageApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.GarbageApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

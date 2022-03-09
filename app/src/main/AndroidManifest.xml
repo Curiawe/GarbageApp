@@ -12,7 +12,6 @@
         <activity
             android:name=".Garbage"
             android:exported="true"
-            android:label="@string/title_activity_garbage"
             android:theme="@style/Theme.GarbageApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

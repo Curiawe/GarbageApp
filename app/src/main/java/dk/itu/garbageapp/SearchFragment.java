@@ -44,6 +44,7 @@ public class SearchFragment extends Fragment {
         prompt.setHint("What do you want to recycle?");
 
         Button where = v.findViewById(R.id.where_button);
+
         //@Override
         where.setOnClickListener(view -> {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
