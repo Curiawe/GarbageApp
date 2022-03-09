@@ -53,7 +53,7 @@ public class ItemsDB extends Observable {
 
     public void addItem (String item, String category) {
         sorter.put(item, new Item(item, category));
-        this.setChanged(); notifyObservers(); // mark as changed and notify observers of change
+        this.setChanged(); notifyObservers();// mark as changed and notify observers of change
     }
 
     public String listAll() {
@@ -64,12 +64,9 @@ public class ItemsDB extends Observable {
         return result.toString();
     }
 
-    // setup methods
+    // setup method
 
     private void populateSorter(Context context){
-        // Loosely based on
-        // https://international.kk.dk/live/housing/settling-into-your-new-home/recycling-in-copenhagen
-        // Not Comprehensive!
 
         // try-catch block largely adapted from https://github.itu.dk/jst/MMAD2022
         try {
@@ -81,6 +78,7 @@ public class ItemsDB extends Observable {
                 sorter.put(gItem[0], new Item(gItem[0], gItem[1]));
                 line= reader.readLine();
             }
+            this.setChanged(); notifyObservers();
         } catch (IOException e) {  // Error occurred when opening raw file for reading.
         }
     }

@@ -15,6 +15,7 @@ import java.util.Observer;
 public class AddFragment extends Fragment implements Observer {
 
     private ItemsDB sorter;
+    private EditText allItems;
 
     public AddFragment() {
         // Required empty public constructor
@@ -38,16 +39,17 @@ public class AddFragment extends Fragment implements Observer {
         View v = inflater.inflate(R.layout.add_fragment, container, false);
 
         // get UI elements
-        EditText allItems = v.findViewById(R.id.all_items);
+        allItems = v.findViewById(R.id.all_items);
+        allItems.setMovementMethod(ScrollingMovementMethod.getInstance());
         String s = sorter.listAll();
         allItems.setText(s);
-        allItems.setMovementMethod(ScrollingMovementMethod.getInstance());
-
         return v;
     }
 
     @Override
     public void update(Observable observable, Object o) {
 
+        String s = sorter.listAll();
+        allItems.setText(s);
     }
 }
