@@ -2,17 +2,17 @@ package dk.itu.garbageapp;
 
 import android.content.Context;
 
+import androidx.lifecycle.ViewModel;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.Observable;
-import java.util.TreeMap;
+import java.util.ArrayList;
 
-public class ItemsDB extends Observable {
+public class ItemsDB extends ViewModel {
     private static ItemsDB sItemsDb;
 
-    private final TreeMap<String, Item> sorter;
+    private final ArrayList<Item> sorter;
 
     /**
      * Initialize the ItemsDB singleton.
@@ -30,7 +30,7 @@ public class ItemsDB extends Observable {
     }
 
     private ItemsDB(Context context) {
-        sorter = new TreeMap<>();
+        sorter = new ArrayList<>();
         new GarbageCategories();
         populateSorter(context);
     }
@@ -42,24 +42,32 @@ public class ItemsDB extends Observable {
      * @return The registered category for a given input. Returns "not found" if there is no match.
      */
     public String lookUp(String input) {
-        if (sItemsDb.sorter.get(input) == null) {
-            return (input + " should be placed in: not found");
+        if (sItemsDb.sorter == null) {
+            return (input + " should be placed in: Database not initialized");
         } else {
-            System.out.println("searching");
-
-            return sItemsDb.sorter.get(input).toString();
+            for (int i = 0; i < sorter.size(); i++) {
+                if (sorter.get(i).toString().startsWith(input)) {
+                    return sorter.get(i).toString();
+                }
+            }
         }
+        // if it's not in there, then...
+            return (input + " should be placed in: not found");
     }
 
     public void addItem (String item, String category) {
-        sorter.put(item, new Item(item, category));
-        this.setChanged(); notifyObservers();// mark as changed and notify observers of change
+        sorter.add(new Item(item, category));
+    }
+
+    public void delete(String item) {
+        sItemsDb.sorter.remove(item);
     }
 
     public String listAll() {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry <String, Item> item: sorter.entrySet()) {
-            result.append("\n").append(item.getValue().toString());
+
+        for(Item item: sorter) {
+            result.append("\n").append(item.toString());
         }
         return result.toString();
     }
@@ -75,10 +83,9 @@ public class ItemsDB extends Observable {
             String line= reader.readLine();
             while (line != null) {
                 String[] gItem= line.split(",");
-                sorter.put(gItem[0], new Item(gItem[0], gItem[1]));
+                sorter.add(new Item(gItem[0], gItem[1]));
                 line= reader.readLine();
             }
-            this.setChanged(); notifyObservers();
         } catch (IOException e) {  // Error occurred when opening raw file for reading.
         }
     }
