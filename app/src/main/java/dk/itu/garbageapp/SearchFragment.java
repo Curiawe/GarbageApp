@@ -24,8 +24,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        sorter = new ViewModelProvider(this).get(ItemsViewModel.class);
+        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class SearchFragment extends Fragment {
         //@Override
         where.setOnClickListener(view -> {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
-            String input = prompt.getText().toString().toLowerCase().trim();
+            String input = prompt.getText().toString();
             // look up the input in our ItemsDB
             String result = sorter.getValue().lookUp(input);
             prompt.setText(result);

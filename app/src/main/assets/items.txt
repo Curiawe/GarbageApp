@@ -1,52 +1,7 @@
 newspaper, paper
-magazine, paper
 milk carton, bio
 shoe box, cardboard
-can, metal
-book, paper
-teddy bears, rest
-cables, metal
-food waste, bio
-rice, bio
-pasta, bio
-meat, bio
-fish, bio
-bones, bio
-bread, bio
-cakes, bio
-fruit, bio
-vegetables, bio
-sauce, bio
-oil, bio
-spreads, bio
-cream cheese, bio
-eggs, bio
-eggshells, bio
-nuts, bio
-nut shells, bio
 coffee grounds, bio
-coffee filter, bio
-tea leaves, bio
-tea filter, bio
-paper towel, bio
-cut flowers, bio
-washing powder box, cardboard
-dishwasher tablet box, cardboard
-cardboard box, cardboard
-cardboard package, cardboard
-cereal box, cardboard
-egg tray, cardboard
-packaging box, cardboard
-shoe box, cardboard
-postcard, cardboard
-furniture,  bulk
-shelves,  bulk
-carpets,  bulk
-mirror,  bulk
-pvc,  bulk
-construction waste, bulk
-construction wood, bulk
-construction glass, bulk
 construction plastic, bulk
 construction metal, bulk
 bicycles, bulk

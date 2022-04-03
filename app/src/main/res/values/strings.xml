@@ -15,5 +15,8 @@
     <string name="title_activity_garbage">Garbage</string>
     <string name="loading_entries">loading entries...</string>
     <string name="clear_search">Clear Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all_items">All Items:</string>
 
 </resources>

@@ -1,29 +1,27 @@
 package dk.itu.garbageapp;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.Objects;
 
 public class AddFragment extends Fragment {
 
-    private ItemsViewModel sorter = new ViewModelProvider(this).get(ItemsViewModel.class);
+    private EditText item;
+    private EditText type;
+    private Button addbtn;
 
-    // EditText by id
-    private EditText itemInput;
-    private EditText typeInput;
-
-    private Button addBtn;
-
+    // Model: Database of items
+    private ItemsViewModel sorter;
 
     public AddFragment() {
         // Required empty public constructor
@@ -34,6 +32,7 @@ public class AddFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
     @Override
@@ -43,29 +42,21 @@ public class AddFragment extends Fragment {
         View v = inflater.inflate(R.layout.add_fragment, container, false);
 
         // get UI elements
-        itemInput = itemInput.findViewById(R.id.add_item_name);
-        typeInput = typeInput.findViewById(R.id.add_item_type);
-        addBtn = addBtn.findViewById(R.id.add_button);
+        item = v.findViewById(R.id.add_item_name);
+        type = v.findViewById(R.id.add_item_type);
+        addbtn = v.findViewById(R.id.add_button);
 
-        addBtn.setOnClickListener(view -> {
-            String itemName = itemInput.getText().toString().toLowerCase().trim();
-            String itemType = typeInput.getText().toString().toLowerCase().trim();
+        addbtn.setOnClickListener(view -> {
+            String itemName = item.getText().toString();
+            String itemType = type.getText().toString();
             sorter.addItem(itemName, itemType);
 
-            // ideally, there would be an alert here
-            // but I don't understand the difference between Snackbar and Toast
-            // so we're just clearing the input so the user sees that something happened.
-
-            itemInput.setText("");
-            typeInput.setText("");
+            item.setText("");
+            type.setText("");
 
         });
 
         return v;
     }
-
-
-
-
 
 }
