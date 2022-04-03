@@ -48,7 +48,7 @@ public class SearchFragment extends Fragment {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
             String input = prompt.getText().toString();
             // look up the input in our ItemsDB
-            String result = sorter.getValue().lookUp(input);
+            String result = sorter.lookUp(input);
             prompt.setText(result);
         });
 
