@@ -13,6 +13,13 @@ import android.widget.EditText;
 
 public class SearchFragment extends Fragment {
 
+    // I know the static is important, but it won't allow me to pass any meaningful Application
+    // Still causes a NullPointerException when trying to do it static
+    /**
+     * Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.app.Application androidx.fragment.app.FragmentActivity.getApplication()' on a null object reference
+     * at dk.itu.garbageapp.SearchFragment.<init>(SearchFragment.java:17)
+     *
+     * */
     private ItemsViewModel sorter;
     private EditText prompt;
 
@@ -24,6 +31,8 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
@@ -48,7 +57,7 @@ public class SearchFragment extends Fragment {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
             String input = prompt.getText().toString();
             // look up the input in our ItemsDB
-            String result = sorter.getValue().lookUp(input);
+            String result = sorter.lookUp(input);
             prompt.setText(result);
         });
 

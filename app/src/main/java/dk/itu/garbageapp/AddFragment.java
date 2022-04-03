@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Objects;
 
+
 public class AddFragment extends Fragment {
+
 
     private EditText item;
     private EditText type;
