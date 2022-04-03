@@ -1,5 +1,6 @@
 package dk.itu.garbageapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.renderscript.ScriptGroup;
 
@@ -15,6 +16,7 @@ public class ItemsDB {
     public ItemsDB(Context context) {
         sorter = new ArrayList<>();
         populateSorter(context);
+
     }
 
     /**
@@ -97,6 +99,7 @@ public class ItemsDB {
 
     private void populateSorter(Context context){
 
+        // ok this isn't working if I want it to be working within the live data model
         // try-catch block largely adapted from https://github.itu.dk/jst/MMAD2022
         try {
             BufferedReader reader= new BufferedReader(
