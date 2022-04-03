@@ -14,7 +14,7 @@ public class Item implements Comparable<Item> {
 
     // let's make sure that our output is somewhat consistent
     private String getCategory (String input) {
-        switch (input.toLowerCase().trim()){
+        switch (input){
             case "bio":
                 return new GarbageCategories().getBio();
             case "bulk":
@@ -39,6 +39,10 @@ public class Item implements Comparable<Item> {
                 return new GarbageCategories().getResidual();
             default: return input;
         }
+    }
+
+    public String getItem() {
+        return item;
     }
 
     @NonNull

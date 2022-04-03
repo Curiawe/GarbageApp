@@ -1,21 +1,29 @@
 package dk.itu.garbageapp;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.text.method.ScrollingMovementMethod;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.Objects;
 
-public class AddFragment extends Fragment implements Observer {
 
-    private ItemsDB sorter;
-    private TextView allItems;
+public class AddFragment extends Fragment {
+
+
+    private EditText item;
+    private EditText type;
+    private Button addbtn;
+
+    // Model: Database of items
+    private ItemsViewModel sorter;
 
     public AddFragment() {
         // Required empty public constructor
@@ -26,10 +34,7 @@ public class AddFragment extends Fragment implements Observer {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ItemsDB.initialize(getActivity());
-        sorter = ItemsDB.get();
-        sorter.addObserver(this);
-
+        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
     @Override
@@ -39,17 +44,21 @@ public class AddFragment extends Fragment implements Observer {
         View v = inflater.inflate(R.layout.add_fragment, container, false);
 
         // get UI elements
-        allItems = v.findViewById(R.id.all_items);
-        allItems.setMovementMethod(ScrollingMovementMethod.getInstance());
-        String s = sorter.listAll();
-        allItems.setText(s);
+        item = v.findViewById(R.id.add_item_name);
+        type = v.findViewById(R.id.add_item_type);
+        addbtn = v.findViewById(R.id.add_button);
+
+        addbtn.setOnClickListener(view -> {
+            String itemName = item.getText().toString();
+            String itemType = type.getText().toString();
+            sorter.addItem(itemName, itemType);
+
+            item.setText("");
+            type.setText("");
+
+        });
+
         return v;
     }
 
-    @Override
-    public void update(Observable observable, Object o) {
-
-        String s = sorter.listAll();
-        allItems.setText(s);
-    }
 }

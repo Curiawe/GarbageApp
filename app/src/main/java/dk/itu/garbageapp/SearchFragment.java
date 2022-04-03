@@ -3,6 +3,7 @@ package dk.itu.garbageapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +13,14 @@ import android.widget.EditText;
 
 public class SearchFragment extends Fragment {
 
-    private ItemsDB sorter;
+    // I know the static is important, but it won't allow me to pass any meaningful Application
+    // Still causes a NullPointerException when trying to do it static
+    /**
+     * Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.app.Application androidx.fragment.app.FragmentActivity.getApplication()' on a null object reference
+     * at dk.itu.garbageapp.SearchFragment.<init>(SearchFragment.java:17)
+     *
+     * */
+    private ItemsViewModel sorter;
     private EditText prompt;
 
 
@@ -23,10 +31,9 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // instantiate Sorter
-        // have to do that first because we want to call a function from the sorter in the GUI
-        ItemsDB.initialize(getActivity());
-        sorter = ItemsDB.get();
+
+
+        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
     @Override
@@ -48,7 +55,7 @@ public class SearchFragment extends Fragment {
         //@Override
         where.setOnClickListener(view -> {
             // let's get the input and ensure that it has no weird capitalization and no trailing white spaces
-            String input = prompt.getText().toString().toLowerCase().trim();
+            String input = prompt.getText().toString();
             // look up the input in our ItemsDB
             String result = sorter.lookUp(input);
             prompt.setText(result);
