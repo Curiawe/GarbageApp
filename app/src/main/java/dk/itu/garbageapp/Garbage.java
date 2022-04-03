@@ -14,8 +14,6 @@ public class Garbage extends AppCompatActivity {
     private FragmentManager fm;
     Fragment fragmentList, fragmentAdd;
 
-    private static ItemsViewModel ItemsDB = new ItemsViewModel();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
