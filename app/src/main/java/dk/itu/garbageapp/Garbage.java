@@ -24,7 +24,7 @@ public class Garbage extends AppCompatActivity {
     }
 
     private void setUpFragments() {
-        fragmentList= fm.findFragmentById(R.id.container_list);
+        fragmentList= fm.findFragmentById(R.id.recycler_view);
         fragmentAdd = fm.findFragmentById(R.id.container_add);
 
         if (fragmentList == null && fragmentAdd == null) {
@@ -32,7 +32,7 @@ public class Garbage extends AppCompatActivity {
             fragmentList = new ListFragment();
             fm.beginTransaction()
                     .add(R.id.container_add, fragmentAdd)
-                    .add(R.id.container_list, fragmentList)
+                    .add(R.id.recycler_view, fragmentList)
                     .commit();
         }
     }
