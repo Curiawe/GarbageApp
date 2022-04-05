@@ -2,8 +2,10 @@ package dk.itu.garbageapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
@@ -22,6 +24,22 @@ public class ListFragment extends Fragment {
     public ListFragment() {
         // Required empty public constructor
     }
+
+    private class ItemHolder extends RecyclerView.ViewHolder  {
+        private TextView mNo , mItemText;
+
+        public ItemHolder(@NonNull View itemView) {
+            super(itemView);
+            mNo = itemView.findViewById(R.id.number);
+            mItemText = itemView.findViewById(R.id.list_item);
+        }
+
+        public void bind(Item item, int position) {
+            mNo.setText(" " + position + " ");
+            mItemText.setText(item.toString());
+        }
+    }
+
 
 
     @Override
