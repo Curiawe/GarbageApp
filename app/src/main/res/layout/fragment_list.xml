@@ -17,14 +17,10 @@
         android:text="@string/all_items"
         android:background="#aaaaaa"/>
 
-    <TextView
-        android:id="@+id/list_display"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="12dp"
-        android:textSize="20sp"
-        android:scrollbars="vertical"
-        android:background="#fff"/>
+        android:background="@color/white"/>
 
 </LinearLayout>

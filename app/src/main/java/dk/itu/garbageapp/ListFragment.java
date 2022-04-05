@@ -1,5 +1,6 @@
 package dk.itu.garbageapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,8 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
-import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ public class ListFragment extends Fragment {
     }
 
     private class ItemHolder extends RecyclerView.ViewHolder  {
-        private TextView mNo , mItemText;
+        private final TextView mNo , mItemText;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
@@ -45,7 +44,8 @@ public class ListFragment extends Fragment {
 
     private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
 
-        public ItemHolder onCreateViewHolder (ViewGroup parent , int viewType) {
+        @NonNull
+        public ItemHolder onCreateViewHolder (@NonNull ViewGroup parent , int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(requireContext());
             View v = layoutInflater.inflate(R.layout.items_list_row, parent, false);
             return (new ItemHolder(v));
@@ -69,11 +69,14 @@ public class ListFragment extends Fragment {
         sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.items_list_row, container, false);
+        View v = inflater.inflate(R.layout.fragment_list, container, false);
 
         list = v.findViewById(R.id.recycler_view);
         list.setLayoutManager(new LinearLayoutManager(requireContext()));
