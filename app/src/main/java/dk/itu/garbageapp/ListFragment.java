@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Layout;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 
 public class ListFragment extends Fragment {
 
-    private TextView list;
+    private RecyclerView list;
 
     // Model: ItemsDB
 
@@ -74,13 +75,12 @@ public class ListFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list, container, false);
 
-        list = v.findViewById(R.id.list_display);
-        list.setText(sorter.listAll());
+        list = v.findViewById(R.id.recycler_view);
+        list.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        sorter.getValue().observe(this,
-                sorter -> {
-                    list.setText(sorter.listAll());
-                });
+        ItemAdapter adapter = new ItemAdapter();
+        list.setAdapter(adapter);
+        sorter.getValue().observe(this, sorter -> {adapter.notifyDataSetChanged();});
 
         return v;
     }
