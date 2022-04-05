@@ -59,6 +59,7 @@ public class ItemsDB {
      */
     public void addItem (String item, String category) {
         sorter.add(new Item(handler.processString(item), handler.processString(category)));
+        // System.out.println("Added " + item + "at position" + sorter.size() + " to sorter.");
     }
 
     // will need this for local version of Assignment 7
@@ -104,8 +105,9 @@ public class ItemsDB {
                     new InputStreamReader(context.getAssets().open("items.txt")));
             String line= reader.readLine();
             while (line != null) {
-                String[] gItem= line.split(", ");
-                sorter.add(new Item(gItem[0], gItem[1]));
+                String[] gItem= line.split(",");
+                addItem(gItem[0], gItem[1].trim());
+                System.out.println("added " + gItem[0]);
                 line= reader.readLine();
             }
         } catch (IOException e) {  // Error occurred when opening raw file for reading.
@@ -119,6 +121,9 @@ public class ItemsDB {
 
     public int getSize() {return sorter.size();}
 
-    public List<Item> getList() {return sorter;}
+    public List<Item> getList() {
+        System.out.print("returning list:");
+        System.out.print(sorter.toString());
+        return sorter;}
 
 }

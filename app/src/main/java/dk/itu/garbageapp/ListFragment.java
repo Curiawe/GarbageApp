@@ -16,8 +16,6 @@ import android.widget.TextView;
 
 public class ListFragment extends Fragment {
 
-    private RecyclerView list;
-
     // Model: ItemsDB
 
     private ItemsViewModel sorter;
@@ -26,19 +24,27 @@ public class ListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private class ItemHolder extends RecyclerView.ViewHolder  {
+    private class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView mNo , mItemText;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             mNo = itemView.findViewById(R.id.number);
             mItemText = itemView.findViewById(R.id.list_item);
-            itemView.setOnClickListener((View.OnClickListener) this);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Item item, int position) {
             mNo.setText(" " + position + " ");
+            System.out.println(item.toString());
             mItemText.setText(item.toString());
+        }
+
+        @Override
+        public void onClick(View v) {
+            String item = (String) ((TextView) v.findViewById(R.id.list_item)).getText();
+
+            sorter.delete(item);
         }
     }
 
@@ -46,14 +52,16 @@ public class ListFragment extends Fragment {
 
         @NonNull
         public ItemHolder onCreateViewHolder (@NonNull ViewGroup parent , int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(requireContext());
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View v = layoutInflater.inflate(R.layout.items_list_row, parent, false);
             return (new ItemHolder(v));
         }
 
         @Override
         public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+            System.out.println("position : " + position);
             Item item = sorter.getItem(position);
+            System.out.println("Item: " + item.toString());
             holder.bind(item, position);
         }
 
@@ -66,7 +74,6 @@ public class ListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -77,9 +84,10 @@ public class ListFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_list, container, false);
+        sorter = new ViewModelProvider(requireActivity()).get(ItemsViewModel.class);
 
-        list = v.findViewById(R.id.recycler_view);
-        list.setLayoutManager(new LinearLayoutManager(requireContext()));
+        RecyclerView list = v.findViewById(R.id.recycler_view);
+        list.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ItemAdapter adapter = new ItemAdapter();
         list.setAdapter(adapter);
