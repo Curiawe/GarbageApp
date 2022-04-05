@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
 import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ListFragment extends Fragment {
             super(itemView);
             mNo = itemView.findViewById(R.id.number);
             mItemText = itemView.findViewById(R.id.list_item);
+            itemView.setOnClickListener((View.OnClickListener) this);
         }
 
         public void bind(Item item, int position) {
@@ -40,7 +42,25 @@ public class ListFragment extends Fragment {
         }
     }
 
+    private class ItemAdapter extends RecyclerView.Adapter<ItemHolder> {
 
+        public ItemHolder onCreateViewHolder (ViewGroup parent , int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(requireContext());
+            View v = layoutInflater.inflate(R.layout.items_list_row, parent, false);
+            return (new ItemHolder(v));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+            Item item = sorter.getItem(position);
+            holder.bind(item, position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return sorter.getSize();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

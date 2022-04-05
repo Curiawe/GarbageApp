@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.List;
+
 public class ItemsViewModel extends AndroidViewModel {
     private static MutableLiveData<ItemsDB> itemsDB;
 
@@ -58,4 +60,12 @@ public class ItemsViewModel extends AndroidViewModel {
     public String listAll() {
         return itemsDB.getValue().listAll();
     }
+
+    public Item getItem(int position) {
+        return itemsDB.getValue().get(position);
+    }
+
+    public int getSize() {return itemsDB.getValue().getSize();}
+
+    public List<Item> getList(){return itemsDB.getValue().getList();}
 }

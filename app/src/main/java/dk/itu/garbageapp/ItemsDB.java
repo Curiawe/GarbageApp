@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ItemsDB {
     private final ArrayList<Item> sorter;
@@ -111,5 +112,13 @@ public class ItemsDB {
             System.out.println("Tried to populate the ItemsDB sorter. Error: " + e.getMessage() + "\n" + e.getCause());
         }
     }
+
+    public Item get(int position) {
+        return sorter.get(position);
+    }
+
+    public int getSize() {return sorter.size();}
+
+    public List<Item> getList() {return sorter;}
 
 }
