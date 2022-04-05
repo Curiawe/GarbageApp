@@ -73,7 +73,7 @@ public class ListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_list, container, false);
+        View v = inflater.inflate(R.layout.items_list_row, container, false);
 
         list = v.findViewById(R.id.recycler_view);
         list.setLayoutManager(new LinearLayoutManager(requireContext()));
