@@ -46,9 +46,15 @@ public class ListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            String item = (String) ((TextView) v.findViewById(R.id.list_item)).getText();
+            String position = (String) ((TextView) v.findViewById(R.id.number)).getText();
 
-            sorter.delete(item);
+            System.out.println("~~~~~~~~~~ Trying to delete " + position);
+
+            int pos = Integer.parseInt(position.trim());
+
+            System.out.println("~~~~~~~~~~ Item split to " + pos);
+            sorter.delete(pos);
+
         }
     }
 

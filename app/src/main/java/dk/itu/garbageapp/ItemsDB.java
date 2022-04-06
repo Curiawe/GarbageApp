@@ -65,17 +65,15 @@ public class ItemsDB {
     // will need this for local version of Assignment 7
 
     /**
-     * Removes Item object with name of user input from the ItemsDB.
+     * Removes Item object with position of user input from the ItemsDB.
      *
-     * Input is NOT case sensitive
-     *
-     * @param item
+     * @param position
      */
-    public void delete(String item) {
+    public void delete(int position) {
         try {
-            sorter.remove(item);
+            sorter.remove(position);
         } catch (Exception e) {
-            System.out.println("Tried to remove " + item + ", but found no such item");
+            System.out.println("Tried to remove item at pos. " + position + ", but found no such item");
         }
 
     }

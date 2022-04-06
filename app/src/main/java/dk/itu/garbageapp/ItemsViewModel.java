@@ -43,12 +43,15 @@ public class ItemsViewModel extends AndroidViewModel {
      *
      * Remove Item object with input name from data structure.
      *
-     * @param item name of the Item to remove
+     * @param position position of the Item to remove
      */
-    public void delete(String item) {
+    public void delete(int position) {
         ItemsDB temp = itemsDB.getValue();
-        temp.delete(item);
+        System.out.println("~~~~~~~~~~ DB size before deletion: " + itemsDB.getValue().getSize());
+        temp.delete(position);
         itemsDB.setValue(temp);
+        System.out.println("~~~~~~~~~~ DB size after deletion: " + itemsDB.getValue().getSize());
+        System.out.println("~~~~~~~~~~ Item deleted from position: " + position);
     }
 
     /**
