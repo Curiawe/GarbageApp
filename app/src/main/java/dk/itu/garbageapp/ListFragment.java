@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,11 +31,14 @@ public class ListFragment extends Fragment {
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
             mNo = itemView.findViewById(R.id.number);
-            mItemText = itemView.findViewById(R.id.list_item);
+            mItemText = itemView.findViewById(R.id.item_listed);
             itemView.setOnClickListener(this);
         }
 
         public void bind(Item item, int position) {
+            if (mNo == null) {
+                System.out.println("~~~~~~~~~~~~~~ we we have a NullPointer at " + position);};
+            if (mItemText == null) {System.out.println("~~~~~~~~~~~~~~ we we have a NullPointer at " + item.toString());}
             mNo.setText(" " + position + " ");
             System.out.println(item.toString());
             mItemText.setText(item.toString());
